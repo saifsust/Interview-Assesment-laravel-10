@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Books extends Model
 {
     use HasFactory;
-
         /**
          * Books model main columns
          *

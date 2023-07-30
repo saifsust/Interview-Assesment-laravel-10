@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserRestController;
-
+use App\Http\Controllers\BookRestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +19,8 @@ use App\Http\Controllers\UserRestController;
 Route::get('/user/all', [UserRestController::class, 'getUsers']);
 
 Route::post('/user', [UserRestController::class, 'insert']);
+
+
+Route::get('/book/all', [BookRestController::class, 'getBooks']);
+
+Route::post('/book', [BookRestController::class, 'insert']);
