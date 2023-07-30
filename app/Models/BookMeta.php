@@ -9,6 +9,9 @@ class BookMeta extends Model
 {
     use HasFactory;
 
+
+    public $timestamps = false;
+
            /**
              * Books model main columns
              *

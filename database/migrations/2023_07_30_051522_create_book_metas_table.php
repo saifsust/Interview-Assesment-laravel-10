@@ -17,8 +17,7 @@ return new class extends Migration
             $table->integer("book_id");
             $table->boolean("is_returned")->default(false);
             $table->date("issued_at");
-            $table->date("returned_at");
-            $table->timestamps();
+            $table->date("returned_at")->nullable();
         });
     }
 
