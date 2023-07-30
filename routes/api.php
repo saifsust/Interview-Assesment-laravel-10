@@ -17,6 +17,9 @@ use App\Http\Controllers\IssueController;
 |
 */
 
+
+Route::post('/login', [UserRestController::class, 'login']);
+
 Route::get('/user/all', [UserRestController::class, 'getUsers']);
 
 Route::post('/user', [UserRestController::class, 'insert']);

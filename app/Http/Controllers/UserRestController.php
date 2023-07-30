@@ -31,4 +31,24 @@ class UserRestController extends Controller
     return response()->json(403)
       ->header('Content-Type', "application/json");
   }
+
+  public function login(Request $request)
+  {
+    if ($request->accepts(['application/json'])) {
+      $data = $request->all();
+      $user = User::where("email", $data['email'])->get()[0];
+      $password = Crypt::decryptString($user['password']);
+      if ($password === $data['password']) {
+        $token = base64_encode($user['email'] . '.' . $data['password'] . ':' . $user['id']);
+        return response()->json($token, 200)
+          ->header('Content-Type', "application/json");
+      }
+      return response()->json($data, 200)
+        ->header('Content-Type', "application/json");
+
+    }
+    return response()->json(401)
+      ->header('Content-Type', "application/json");
+  }
+
 }
