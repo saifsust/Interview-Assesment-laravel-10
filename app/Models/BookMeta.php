@@ -12,16 +12,16 @@ class BookMeta extends Model
 
     public $timestamps = false;
 
-           /**
-             * Books model main columns
-             *
-             * @var array<int, string>
-             */
-            protected $fillable = [
-                'user_id',
-                'book_id',
-                "is_returned",
-                "issued_at",
-                "returned_at"
-            ];
+    /**
+     * Books model main columns
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'user_id',
+        'book_id',
+        "is_returned",
+        "issued_at",
+        "returned_at"
+    ];
 }
