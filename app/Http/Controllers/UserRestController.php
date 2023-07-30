@@ -39,8 +39,8 @@ class UserRestController extends Controller
       $user = User::where("email", $data['email'])->get()[0];
       $password = Crypt::decryptString($user['password']);
       if ($password === $data['password']) {
-        $token = base64_encode($user['email'] . '.' . $data['password'] . ':' . $user['id']);
-        return response()->json($token, 200)
+        $token = base64_encode($user['email'] . ':' . $data['password'] . ':' . $user['id']);
+        return response()->json(["token"=> $token], 200)
           ->header('Content-Type', "application/json");
       }
       return response()->json($data, 200)

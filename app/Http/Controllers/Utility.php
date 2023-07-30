@@ -7,21 +7,27 @@ use Illuminate\Http\Request;
 use App\Models\User;
 
 
+
 class Utility
 {
-    public function __construct()
-    {
-    }
+
 
     public static function isAuthenticated(Request $request)
     {
-        $data = $request->header('authorization');
-        $user = User::where("email", $data['email'])->get()[0];
-        $password = Crypt::decryptString($user['password']);
-        if ($password === $data['password']) {
-            return base64_encode($user['email'] . '.' . $data['password'] . ':'.$user['id']);
+        $authorization = $request->header('authorization');
+
+        if ($authorization == null)
+            return false;
+
+        $data = preg_split("/[:]+/", base64_decode($authorization));
+
+        if ($data == null) {
+            return false;
         }
-        return response()->json(401)
-            ->header('Content-Type', "application/json");
+
+        $user = User::where("email", $data[0])->get()[0];
+        $password = Crypt::decryptString($user['password']);
+        return $password == $data[1] && $user['email'] == $data[0] && $user['id'] == $data[2];
     }
+
 }
