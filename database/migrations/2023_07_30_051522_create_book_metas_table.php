@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use LaravelDoctrine\Extensions\Timestamps\Timestamps;
 
 return new class extends Migration
 {
@@ -16,8 +17,8 @@ return new class extends Migration
             $table->integer("user_id");
             $table->integer("book_id");
             $table->boolean("is_returned")->default(false);
-            $table->date("issued_at");
-            $table->date("returned_at")->nullable();
+            $table->timestamp("issued_at");
+            $table->timestamp("returned_at")->nullable();
         });
     }
 

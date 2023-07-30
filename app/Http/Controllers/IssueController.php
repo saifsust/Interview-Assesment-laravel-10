@@ -28,4 +28,29 @@ class IssueController extends Controller
                                  ->header('Content-Type', "application/json");
              }
 
+
+
+
+      public function returned(Request $request){
+                   if($request->accepts(['application/json'])){
+                       Log::info($request->all());
+                        $data = $request->all();
+                        $bookMeta = BookMeta::orderBy('issued_at', 'desc')->limit(1)->get()[0];
+                        Log::info($bookMeta);
+                        $returned_at = Carbon::now()->toDateTimeString();
+                        $data = array(
+                        "user_id" =>  $bookMeta['user_id'],
+                        "book_id" =>  $bookMeta['book_id'],
+                        "is_returned" =>true,
+                         "issued_at" => $bookMeta['issued_at'],
+                         "returned_at"=>$returned_at
+                        );
+
+                       return response()->json(BookMeta::where('id', $bookMeta['id'])->update($data), 201)
+                                         ->header('Content-Type', "application/json");
+                   }
+                   return response()->json(403)
+                                    ->header('Content-Type', "application/json");
+                }
+
 }

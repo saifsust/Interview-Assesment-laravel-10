@@ -26,3 +26,5 @@ Route::get('/book/all', [BookRestController::class, 'getBooks']);
 Route::post('/book', [BookRestController::class, 'insert']);
 
 Route::post('/book/issue', [IssueController::class, 'issued']);
+
+Route::post('/book/return', [IssueController::class, 'returned']);
